@@ -30,6 +30,22 @@ module EventsCalendarTags
   end
 
   desc %{
+    Renders the contained elements only if there is at least one event
+  }
+  tag 'if_events' do |tag|
+    events = tag.locals.events.count
+    tag.expand if events > 0
+  end
+  
+  desc %{
+    Renders the contained elements only if there are no events
+  }
+  tag 'unless_events' do |tag|
+    events = tag.locals.events.count
+    tag.expand unless events > 0
+  end
+  
+  desc %{
     Loops through events.
   }
   tag 'events:each' do |tag|
